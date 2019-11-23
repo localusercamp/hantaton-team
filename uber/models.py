@@ -6,26 +6,40 @@ from rest_framework import authentication, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)
+
+class Project(models.Model):
+    # name = models.CharField(max_length=100, blank=False, null=False)
+    # company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    # projects_universities = models.ForeignKey(ProjectsUniversities, on_delete=models.PROTECT)
+
 class University(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
-    
-class Project(models.Model):
-    name = models.CharField(max_length=100, blank=False, null=False)  
+    master = models.CharField(max_length=100, blank=False, null=False) # Куратор
+
+class Subscribers(models.Model):
+    university = models.ForeignKey(University, on_delete=models.PROTECT)
+    projects = models.ForeignKey(Project, on_delete=models.PROTECT)
+
+
+
+class Mentor(models.Model):
+    first_name = models.CharField(max_length=50, null=False, blank=False)
+    last_name = models.CharField(max_length=50, null=False, blank=False)
+    third_name = models.CharField(max_length=50, null=True, blank=True)
+
+class WorkGroup(models.Model):
+    mentor = models.ForeignKey(Mentor, on_delete=models.PROTECT)
 
 class Student(models.Model):
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     third_name = models.CharField(max_length=50, null=True, blank=True)
-    projects = models.ForeignKey(Project, on_delete=models.PROTECT)
-
+    work_group = models.ForeignKey(WorkGroup, on_delete=models.PROTECT)
     university = models.ForeignKey(University, on_delete=models.PROTECT)
-    
-
-
-class Wut(models.Model):
-    pass
-
-
 
 
 # class AccountPayment(models.Model):
