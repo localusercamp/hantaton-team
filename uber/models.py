@@ -7,9 +7,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 class University(models.Model):
-    # name = models.CharField(max_length=50, blank=False) 
-    # models.ForeignKey(,on_delete=models.PROTECT)
-
+    name = models.CharField(max_length=100, blank=False, null=False)
+    
+class Student(models.Model):
+    first_name = models.CharField(max_length=50, null=False, blank=False)
+    last_name = models.CharField(max_length=50, null=False, blank=False)
+    third_name = models.CharField(max_length=50, null=True, blank=True)
+    
+    university = models.ForeignKey(University, on_delete=models.PROTECT)
+    
 
 
 
