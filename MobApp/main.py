@@ -3,6 +3,6 @@ from kivy.uix.button import Button
 
 class MyApp(App):
 	def build(self):
-		return Button(text='ti hyi')
+		return Button(text='init mobile')
 
 MyApp().run()
