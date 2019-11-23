@@ -1,0 +1,17 @@
+--------------------------------------
+      запрос на созданеие юзера
+--------------------------------------
+$("#create").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: window.location.href+"create/",
+        type: 'GET',
+        success: function (data) {
+            alert("success")
+        },
+        error: function(){
+            alert("Cannot get data");
+        }
+    });
+  });
+--------------------------------------

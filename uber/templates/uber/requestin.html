@@ -1,0 +1,110 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+            <form method="post">
+                <input type="text" name="username" id="user_id">
+                <input type="text" name="password" id="user_id">
+            <button type="submit">Login</button>
+            </form>
+
+            <input type="text" name="user_id" id="user_id">
+            <button type="button" id="but"></button>
+            <button type="button" id="gt"></button>
+            <button type="button" id="ver">Verify</button>
+            <button type="button" id="tst">SimpleTest</button>
+        {% block content %}
+            {% endblock %}
+            <script>
+                var token = ""; 
+                $("#but").click(function(e) {
+                    e.preventDefault();
+                    $.when($.ajax({
+                        url: "/api-token-auth/",
+                        /*beforeSend: function(xhr) { 
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa("username:password")); 
+                        },*/
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        processData: false,
+                        data: '{"username":"evgen","password":"123"}',
+                        success: function (data) {
+                            token = (JSON.stringify(data)).split("\"")[3];
+                        },
+                        error: function(){
+                            alert("Cannot get data");
+                        }
+                    })).done(function(){
+                        alert(token);
+                    });
+                });
+                
+                $("#gt").click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "GetAllTransactions/",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader ("Authorization: Bearer " + token);
+                        },
+                        type: 'GET',
+                        success: function (data) {
+                            alert(data);
+                        },
+                        error: function(){
+                            alert("Cannot get data");
+                        }
+                    });
+                });
+
+                $("#ver").click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "api-token-verify/",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader ("token : token"+ );
+                        },
+                        type: 'GET',
+                        success: function (data) {
+                            
+                        },
+                        error: function(){
+                            alert("Cannot get data");
+                        }
+                    });
+                });
+
+                $("#tst").click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "GetT/",
+                        type: 'GET',
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function(){
+                            alert("Cannot get data");
+                        }
+                    });
+                });
+
+                /*$("#gt").click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: "GetAllTransactions/",
+                        headers: {
+                            "Authorization: JWT " + token
+                        },
+                        success: function(result) {
+                            alert(result);
+                        },
+                        error: function(result) {
+                            alert('ajax error');
+                        }
+                    });
+                });*/
+            </script>
+</body>

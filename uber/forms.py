@@ -6,10 +6,23 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        fields = ('username', 'first_name', 'last_name', 'inn', 'email')
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
+# ------
+class CustomUserCreationFormCompanyUniversity(UserCreationForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('inn', 'email')
+
+class CustomUserCreationFormStudentMentor(UserCreationForm):
+    
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'first_name', 'last_name', 'third_name', 'email')
+
