@@ -209,64 +209,59 @@
           <div class="divider-custom-line"></div>
           <div class="divider-custom-icon">
             <i class="fas fa-star"></i>
-          </div>
+          </div>  
           <div class="divider-custom-line"></div>
         </div>
   
         <!-- Sign Up Section Content -->
-        <form action="index.html" method="post">        
-            <fieldset>
-              <legend><span class="number">1</span>Your basic info</legend>
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="user_name">
-              
-              <label for="mail">Email:</label>
-              <input type="email" id="mail" name="user_email">
-              
-              <label for="password">Password:</label>
-              <input type="password" id="password" name="user_password">
-            </fieldset>
-            
-            <fieldset>
-              <legend><span class="number">2</span>Your profile</legend>
-              <label for="bio">Biography:</label>
-              <textarea id="bio" name="user_bio"></textarea>
-            </fieldset>
-            <fieldset>
-            <label for="job">Job Role:</label>
-            <select id="job" name="user_job">
-              <optgroup label="Web">
-                <option value="frontend_developer">Front-End Developer</option>
-                <option value="php_developor">PHP Developer</option>
-                <option value="python_developer">Python Developer</option>
-                <option value="rails_developer"> Rails Developer</option>
-                <option value="web_designer">Web Designer</option>
-                <option value="WordPress_developer">WordPress Developer</option>
-              </optgroup>
-              <optgroup label="Mobile">
-                <option value="Android_developer">Androild Developer</option>
-                <option value="iOS_developer">iOS Developer</option>
-                <option value="mobile_designer">Mobile Designer</option>
-              </optgroup>
-              <optgroup label="Business">
-                <option value="business_owner">Business Owner</option>
-                <option value="freelancer">Freelancer</option>
-              </optgroup>
-              <optgroup label="Other">
-                <option value="secretary">Secretary</option>
-                <option value="maintenance">Maintenance</option>
-              </optgroup>
-            </select>
-            
-              <label>Interests:</label>
-              <input type="checkbox" id="development" value="interest_development" name="user_interest"><label class="light" for="development">Development</label><br>
-                <input type="checkbox" id="design" value="interest_design" name="user_interest"><label class="light" for="design">Design</label><br>
-              <input type="checkbox" id="business" value="interest_business" name="user_interest"><label class="light" for="business">Business</label>
-            
-            </fieldset>
-            <button type="submit">Sign Up</button>
-          </form>
-        
+        <div class="row">
+
+          <!-- Sign Up 1 -->
+          <div class="col-md-5 col-lg-3">
+            <div class="portfolio-item mx-auto">
+              <button class="btn">
+                <a href="./views/signUpStudent.html">
+                    <img class="img-fluid" src="./img/portfolio/005-talk.png" alt="">
+                </a>
+              </button>
+            </div>
+          </div>
+          
+  
+          <!-- Sign Up 2 -->
+          <div class="col-md-5 col-lg-3">
+            <div class="portfolio-item mx-auto">
+              <button class="btn">
+                <a href="">
+                  <img class="img-fluid" src="./img/portfolio/005-talk.png" alt="">
+                </a>
+              </button>
+            </div>
+          </div>
+  
+          <!-- Sign Up 3 -->
+          <div class="col-md-5 col-lg-3">
+            <div class="portfolio-item mx-auto">
+              <button class="btn">
+                <a href="">
+                    <img class="img-fluid" src="./img/portfolio/005-talk.png" alt="">
+                </a>
+              </button>
+            </div>
+          </div>
+  
+          <!-- Sign Up 4 -->
+          <div class="col-md-5 col-lg-3">
+            <div class="portfolio-item mx-auto">
+              <button class="btn">
+                <a href="">
+                  <img class="img-fluid" src="./img/portfolio/005-talk.png" alt="">
+                </a>
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -534,6 +529,46 @@
       </div>
     </div>
   </div>
+
+  <!-- Sign Up Modal -->
+  <div class="portfolio-modal modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body text-center">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <!-- Portfolio Modal - Title -->
+                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Image -->
+                <img class="img-fluid rounded mb-5" src="./img/portfolio/005-talk.png" alt="">
+                <!-- Portfolio Modal - Text -->
+                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                <button class="btn btn-primary" href="#" data-dismiss="modal">
+                  <i class="fas fa-times fa-fw"></i>
+                  Close Window
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Bootstrap core JavaScript -->
   <script src="./vendor/jquery/jquery.min.js"></script>
