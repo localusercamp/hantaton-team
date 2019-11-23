@@ -1,45 +1,62 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.utils import timezone
 from rest_framework import authentication, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth.models import User
 
-
+# class User(models.Model):
+#     login = models.CharField(max_length=30, blank=False, null=False)
+#     password = models.CharField(max_length=30, blank=False, null=False)
+#     role = 
 
 class Company(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
-
-class Project(models.Model):
-    # name = models.CharField(max_length=100, blank=False, null=False)
-    # company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    # projects_universities = models.ForeignKey(ProjectsUniversities, on_delete=models.PROTECT)
+    amount_of_allowed_projects = models.IntegerField()
 
 class University(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     master = models.CharField(max_length=100, blank=False, null=False) # Куратор
 
-class Subscribers(models.Model):
+class Project(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)
+
+    company = models.ForeignKey(Company, on_delete=models.PROTECT)
     university = models.ForeignKey(University, on_delete=models.PROTECT)
-    projects = models.ForeignKey(Project, on_delete=models.PROTECT)
 
-
+class Subscriber(models.Model):
+    university = models.ForeignKey(University, on_delete=models.PROTECT)
+    project = models.ForeignKey(Project, on_delete=models.PROTECT)
 
 class Mentor(models.Model):
+    login = models.CharField(max_length=30, blank=False, null=True)
+    password = models.CharField(max_length=30, blank=False, null=True)
+
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     third_name = models.CharField(max_length=50, null=True, blank=True)
 
 class WorkGroup(models.Model):
+    name = models.CharField(max_length=50, null=False, blank=False)
+
     mentor = models.ForeignKey(Mentor, on_delete=models.PROTECT)
+    university = models.ForeignKey(University, on_delete=models.PROTECT)
 
 class Student(models.Model):
+    login = models.CharField(max_length=30, blank=False, null=True)
+    password = models.CharField(max_length=30, blank=False, null=True)
+
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     third_name = models.CharField(max_length=50, null=True, blank=True)
+
     work_group = models.ForeignKey(WorkGroup, on_delete=models.PROTECT)
-    university = models.ForeignKey(University, on_delete=models.PROTECT)
+    university = models.ForeignKey(University, on_delete=models.PROTECT, null=True)
+
 
 
 # class AccountPayment(models.Model):
