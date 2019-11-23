@@ -30,9 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-AUTHENTICATION_BACKENDS = [
-   'uber.authentication_backend.AuthenticationBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#    'uber.authentication_backend.AuthenticationBackend',
+# ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'uber',
+    'uber.apps.UberConfig',
+    # 'uber',
 ]
 
 REST_FRAMEWORK = {
@@ -56,7 +57,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'uber.authentication_middleware.AutomaticUserLoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -66,7 +66,7 @@ ROOT_URLCONF = 'ht.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'uber/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'ht.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql', 
-        'NAME': 'ht',
+        'NAME': 'htn',
         'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': 'localhost',
@@ -134,3 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'uber.CustomUser'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'

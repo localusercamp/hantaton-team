@@ -25,6 +25,7 @@ media
 *.so
 
 # Distribution / packaging
+old
 .Python
 build/
 develop-eggs/

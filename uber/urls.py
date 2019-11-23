@@ -1,15 +1,10 @@
 from django.contrib import admin
-from django.urls import path
-from . import views
+from django.urls import path, include
+from django.views.generic.base import TemplateView
+from .views import SignUpView
 
 urlpatterns = [
-    path('login/', views.log_in),
-    path('login/auth/', views.authenticate),
-    # path('admin/', admin.site.urls),
-    # path('register/', views.register, name='register'),
-    # path('user_login/', views.user_login, name='user_login'),
-    # path('admin/', admin.site.urls),
-    # path('',views.index,name='index'),
-    # path('special/',views.special,name='special'),
-    # path('logout/', views.user_logout, name='logout')
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('uber/', include('django.contrib.auth.urls')),
+    path('signup/', SignUpView.as_view(), name='signup'),
 ]
