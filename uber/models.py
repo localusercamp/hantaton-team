@@ -9,15 +9,21 @@ from rest_framework.views import APIView
 class University(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     
+class Project(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)  
+
 class Student(models.Model):
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     third_name = models.CharField(max_length=50, null=True, blank=True)
-    
+    projects = models.ForeignKey(Project, on_delete=models.PROTECT)
+
     university = models.ForeignKey(University, on_delete=models.PROTECT)
     
 
 
+class Wut(models.Model):
+    pass
 
 
 
