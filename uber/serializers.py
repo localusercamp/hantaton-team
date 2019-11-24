@@ -1,7 +1,15 @@
 from rest_framework import serializers
 from .models import *
 
-
+class ProjectSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Project
+        fields = ['name', 'discription', 'time', 'money']
+    
+    def create(self, data, _university, _company):
+        project = Project(name=data['name'], discription=data['discription'], time=data['time'], money=data['money'], univresity=_university, company=_company)
+        project.save()
 
 class StudentSerializer(serializers.ModelSerializer):
 
@@ -12,16 +20,40 @@ class StudentSerializer(serializers.ModelSerializer):
     
     def create(self, data, user):
         student = Student(name=data['name'], email=data['email'], phone=data['phone'], linked_user=user)
-        user.save()
+        student.save()
 
 class MentorSerializer(serializers.ModelSerializer):
-    pass
+
+    class Meta:
+        model = Mentor
+        fields = ['name', 'email', 'phone', 'linked_user']
+        extra_kwargs = {'password': {'write_only': True}}
+    
+    def create(self, data, user):
+        mentor = Mentor(name=data['name'], email=data['email'], phone=data['phone'], linked_user=user)
+        mentor.save()
 
 class CompanySerializer(serializers.ModelSerializer):
-    pass
+    
+    class Meta:
+        model = Company
+        fields = ['name', 'email', 'phone', 'orgn', 'inn', 'kpp', 'bank', 'director', 'bik', 'city', 'linked_user']
+        extra_kwargs = {'password': {'write_only': True}}
+    
+    def create(self, data, user):
+        company = Company(name=data['name'], email=data['email'], phone=data['phone'], linked_user=user)
+        company.save()
 
 class UniversitySerializer(serializers.ModelSerializer):
-    pass
+    
+    class Meta:
+        model = University
+        fields = ['name', 'email', 'phone', 'orgn', 'inn', 'kpp', 'bank', 'director', 'bik', 'city', 'linked_user']
+        extra_kwargs = {'password': {'write_only': True}}
+    
+    def create(self, data, user):
+        univer = University(name=data['name'], email=data['email'], phone=data['phone'], linked_user=user)
+        univer.save()
 
 class CustomUserSerializer(serializers.ModelSerializer):
 
@@ -31,23 +63,28 @@ class CustomUserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, to_custom_user, to_serializer):
-        user = ""
 
         if to_custom_user['role'] == 'student':
             user = CustomUser(username=to_custom_user['username'], email=to_custom_user['email'])
+            user.set_password(to_custom_user['password'])
+            user.save()
             StudentSerializer.create(StudentSerializer, to_serializer, user)
         elif to_custom_user['role'] == 'mentor':
             user = CustomUser(username=to_custom_user['username'], email=to_custom_user['email'])
+            user.set_password(to_custom_user['password'])
+            user.save()
             MentorSerializer.create(MentorSerializer, to_serializer, user)
         elif to_custom_user['role'] == 'company':
-            user = CustomUser(username=to_custom_user['username'], email=to_custom_user['email'], inn=to_custom_user['inn'])
+            user = CustomUser(username=to_custom_user['inn'], email=to_custom_user['email'], inn=to_custom_user['inn'])
+            user.set_password(to_custom_user['password'])
+            user.save()
             CompanySerializer.create(CompanySerializer, to_serializer, user)
         elif to_custom_user['role'] == 'university':
-            user = CustomUser(username=to_custom_user['username'], email=to_custom_user['email'], inn=to_custom_user['inn'])
+            user = CustomUser(username=to_custom_user['inn'], email=to_custom_user['email'], inn=to_custom_user['inn'])
+            user.set_password(to_custom_user['password'])
+            user.save()
             UniversitySerializer.create(UniversitySerializer, to_serializer, user)
 
-        user.set_password(to_custom_user['password'])
-        user.save()
         return user
 
 # class BonusTransactionSerializer(serializers.ModelSerializer):

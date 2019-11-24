@@ -16,14 +16,14 @@ urlpatterns = [
     path('chooseregrole/regnewuserS/create/', views.CreateStudent), # (запрос) создать студент
     path('chooseregrole/regnewuserM/create/', views.CreateMentor), # (запрос) создать ментор
 
-
-
-
     path('chooseloginrole/', views.ChooseRegisterRole),
     path('loginC/', views.CompanyLogin), # компания
     path('loginU/', views.UniversityLogin), # универ
     path('loginS/', views.StudentLogin), # студент
     path('loginM/', views.MentorLogin), # ментор
+
+    path('createproject/', views.CreateProjectView),
+    path('createproject/create', views.CreateProject),
 
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('uber/', include('django.contrib.auth.urls')),
